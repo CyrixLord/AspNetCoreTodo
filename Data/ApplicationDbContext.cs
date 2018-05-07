@@ -15,6 +15,11 @@ namespace AspNetCoreTodo.Data
         {
         }
 
+        public DbSet<TodoItem> Items { get; set; } // add our TODO db context page 49 from our TodoItem model class
+                                                   // db set represents a table or collection. we tell entity framework  to store Todoitem entities
+                                                   // in a TABLE called 'Items'
+                                                   //there isn't an 'Items' table yet in the db so we have to migrate (sync) the db to agree with our code
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -33,7 +33,17 @@ namespace AspNetCoreTodo
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            // we now have a databse so we'll use that not faketodoitemservices...
+            //services.AddSingleton<ITodoItemService, FakeTodoItemService>(); // wire up fake database concrete class to the ITodoItemService interface
+            // or just use the faketodoitemservice whenever the itodoitemservice interface is requested
+            // do this by using a singleton where only ONE live copy of the faketodoitemservice is created and just reuse it
+            // dont destroy the object. use scoped for any other service 
             // Add application services.
+
+
+            services.AddScoped<ITodoItemService, TodoItemService>(); // scoped so each web request creates a new instance of TodoItemService. 
+                                                                     // scope is required when you use a database p57
+
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
